@@ -16,4 +16,8 @@ const getTrains = async (source, destination) => {
     return result.rows;
 };
 
-module.exports = { addTrain, getTrains };
+const deleteTrain = async (trainId) => {
+    await pool.query('DELETE FROM trains WHERE id = $1', [trainId]);
+};
+
+module.exports = { addTrain, getTrains, deleteTrain };

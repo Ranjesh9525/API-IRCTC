@@ -1,4 +1,4 @@
-const { addTrain, getTrains } = require('../models/trainModel');
+const { addTrain, getTrains, deleteTrain } = require('../models/trainModel');
 
 const createTrain = async (req, res) => {
     const { source, destination, totalSeats } = req.body;
@@ -20,4 +20,14 @@ const getTrainAvailability = async (req, res) => {
     }
 };
 
-module.exports = { createTrain, getTrainAvailability };
+const deleteTrain = async (req, res) => {
+    const { trainId } = req.params;
+    try {
+        await deleteTrain(trainId);
+        res.json({ message: 'Train deleted successfully' });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+module.exports = { createTrain, getTrainAvailability, deleteTrain };
